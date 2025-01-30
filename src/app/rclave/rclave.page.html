@@ -1,47 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Recuperar clave</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-grid class="full-height">
-    <ion-row class="ion-justify-content-center ion-align-items-center full-height">
-      <ion-col size="12" size-md="8" size-lg="6">
-
-        <!-- Correo -->
-        <ion-item>
-          <ion-label position="floating">Correo</ion-label>
-          <ion-input [disabled]="bloquearEmail" type="email" [(ngModel)]="txt_correo" (focusout)="validarEmail()"></ion-input>
+<ion-content>
+  <ion-grid>
+    <div class="content">
+      <ion-col class="form_recuperacion">
+        <ion-item class="correo">
+          <ion-input [disabled]="bloquearEmail" type="email" placeholder="Ingresa el Correo" [(ngModel)]="txt_correo" (focusout)="validarEmail()"></ion-input>
         </ion-item>
-
-        <!-- Clave -->
-        <ion-item>
-          <ion-label position="floating">Nueva clave</ion-label>
-          <ion-input [disabled]="bloquearCampos" type="password" [(ngModel)]="txt_clave" ></ion-input>
+        <ion-item class="new_pass">
+          <ion-input [disabled]="bloquearCampos" type="password" placeholder="Ingresa la nueva clave" [(ngModel)]="txt_clave" ></ion-input>
         </ion-item>
-
-        <!-- Confirmar Clave -->
-        <ion-item>
-          <ion-label position="floating">Confirmar Clave</ion-label>
-          <ion-input [disabled]="bloquearCampos" type="password" [(ngModel)]="txt_cclave" (focusout)="validarclave()"></ion-input>
+        <ion-item class="conf_pass">
+          <ion-input [disabled]="bloquearCampos" type="password" placeholder="Repite la nueva Clave" [(ngModel)]="txt_cclave" (focusout)="validarclave()"></ion-input>
         </ion-item>
-
-        <ion-item lines="none">
-          <ion-label color="danger" *ngIf="mensajeClave">{{ mensajeClave }}</ion-label>
+        <ion-item class="message">
+          <ion-label *ngIf="mensajeClave">{{ mensajeClave }}</ion-label>
         </ion-item>
-
-        <!-- Botones -->
-        <ion-row class="ion-margin-top ion-justify-content-between">
-          <ion-col size="12" size-md="5">
-            <ion-button  [disabled]="bloqueaRecuperar" expand="block" color="success" (click)="recuperar()">Recuperar</ion-button>
+        <ion-row class="buttons">
+          <ion-col>
+            <ion-button class="btn_recup" [disabled]="bloqueaRecuperar" (click)="recuperar()">Recuperar</ion-button>
           </ion-col>
-          <ion-col size="12" size-md="5">
-            <ion-button expand="block" color="danger" (click)="cancelar()">Cancelar</ion-button>
+          <ion-col>
+            <ion-button class="btn_cancel" (click)="cancelar()">Cancelar</ion-button>
           </ion-col>
         </ion-row>
       </ion-col>
-    </ion-row>
+    </div>
   </ion-grid>
 </ion-content>
-

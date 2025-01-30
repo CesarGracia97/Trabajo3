@@ -54,3 +54,24 @@ ion-button {
   align-items: center;
   align-content: center;
 }
+
+ion-label{
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+ion-item{
+  font-size: 7pt;
+}
+
+ion-label {
+  position: relative;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+ion-label:hover {
+  color: #ff9800; /* Cambia el color al pasar el cursor */
+}
