@@ -2,22 +2,22 @@
   <div class="content_main">
     <ion-card class="card_form">
       <ion-item class="input_field">
-        <ion-input type="number" maxlength="10" [(ngModel)]="txt_cedula" (focusout)="validaCedula()" pattern="[0-9]*" placeholder="Ingrese su cédula" />
+        <ion-input type="number" maxlength="10" [(ngModel)]="cid" (focusout)="validarCID()" pattern="[0-9]*" placeholder="Ingrese su cédula" />
       </ion-item>
       <ion-item class="input_field">
-        <ion-input type="text" [(ngModel)]="txt_nombre" placeholder="Ingrese su Nombre"/>
+        <ion-input type="text" [(ngModel)]="nombre" placeholder="Ingrese su Nombre"/>
       </ion-item>
       <ion-item class="input_field">
-        <ion-input type="text" [(ngModel)]="txt_apellido" placeholder="Ingrese su Apellido" />
+        <ion-input type="text" [(ngModel)]="apellido" placeholder="Ingrese su Apellido" />
       </ion-item>
       <ion-item class="input_field">
-        <ion-input type="email" [(ngModel)]="txt_correo" placeholder="Ingrese su Correo"/>
+        <ion-input type="email" [(ngModel)]="mail" placeholder="Ingrese su Correo"/>
       </ion-item>
       <ion-item class="input_field">
-        <ion-input type="password" [(ngModel)]="txt_clave" (focusout)="vclave()" placeholder="Ingresa tu contraseña" />
+        <ion-input type="password" [(ngModel)]="pass" (focusout)="comprobarPass()" placeholder="Ingresa tu contraseña" />
       </ion-item>
       <ion-item class="input_field">
-        <ion-input type="password" [(ngModel)]="txt_cclave" (focusout)="vclave()" placeholder="Ingresa tu contraseña de nuevo" />
+        <ion-input type="password" [(ngModel)]="repite_pass" (focusout)="comprobarPass()" placeholder="Ingresa tu contraseña de nuevo" />
       </ion-item>
       
       <ion-item class="message">
@@ -29,10 +29,10 @@
 
       <ion-row class="button_group">
         <ion-col>
-          <ion-button class="btn_register" (click)="registrar()">Registrarse</ion-button>
+          <ion-button class="btn_register" (click)="signUp()">Registrarse</ion-button>
         </ion-col>
         <ion-col>
-          <ion-button class="btn_cancel" (click)="cancelar()">Cancelar</ion-button>
+          <ion-button class="btn_cancel" (click)="retornarLogin()">Cancelar</ion-button>
         </ion-col>
       </ion-row>
     </ion-card>

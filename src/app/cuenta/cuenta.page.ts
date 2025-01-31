@@ -11,36 +11,24 @@ import { usuarioDto } from 'src/interfaces/usuario';
   styleUrls: ['./cuenta.page.scss'],
   standalone: false,
 })
-export class CuentaPage implements OnInit {
+export class CuentaPage {
 
-  txt_cedula: string = '';
-  txt_nombre: string = '';
-  txt_apellido: string = '';
-  txt_correo: string = '';
-  txt_clave: string = '';
-  txt_cclave: string = '';
-  mensaje: string = '';
-  mensajeClave: string = '';
-
+  cid: string = ''; nombre: string = ''; apellido: string = '';
+  mail: string = ''; pass: string = ''; repite_pass: string = '';
+  mensaje: string = ''; mensajeClave: string = '';
 
   constructor(
-    private servicio: AccesoService,
-    private modalView: ModalController,
-    private loadingService: LoadingService
-
+    private servicio: AccesoService, private modalView: ModalController, private loadingService: LoadingService
   ) { }
 
-  ngOnInit() {
-  }
-
-  validaCedula() {
-    if(this.txt_cedula.toString().length ===10) {
+  validarCID() {
+    if(this.cid.toString().length ===10) {
     const API = VALIDATION_API
 
-    const endPoint = formatUrl(API,this.txt_cedula,filterid)
+    const endPoint = formatUrl(API,this.cid,filterid)
       this.servicio.getData(endPoint).subscribe((response: any) => {
         if (response.value) {
-          this.txt_cedula = "";
+          this.cid = "";
           this.loadingService.showToast("El usuario ya se encuentra registrado", 3000,'primary')
         }
       });
@@ -48,32 +36,27 @@ export class CuentaPage implements OnInit {
 
   }
 
-  vclave() {
-    if (this.txt_clave !== this.txt_cclave) {
+  comprobarPass() {
+    if (this.pass !== this.repite_pass) {
       this.mensajeClave = 'Las claves no coinciden';
     } else {
       this.mensajeClave = '';
     }
   }
 
-  cancelar() {
+  retornarLogin() {
     this.modalView.dismiss();
   }
 
-  registrar() {
-
-    if (this.txt_cedula != "" &&
-        this.txt_nombre != "" &&
-        this.txt_apellido != "" &&
-        this.txt_correo != "" &&
-        this.txt_clave != "") {
+  signUp() {
+    if ( this.cid != "" && this.nombre != "" && this.apellido != "" && this.mail != "" && this.pass != "" ) {
 
       const datos:usuarioDto = {
-        ci:this.txt_cedula,
-        nombre_persona:this.txt_nombre,
-        apellido_persona:this.txt_apellido,
-        clave_persona:this.txt_clave,
-        correo_persona:this.txt_correo,
+        ci:this.cid,
+        nombre_persona:this.nombre,
+        apellido_persona:this.apellido,
+        clave_persona:this.pass,
+        correo_persona:this.mail,
         id:"0"
       };
 

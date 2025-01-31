@@ -1,19 +1,76 @@
-.full-height {
-  height: 100%;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  padding: 40px;
 }
 
-
-ion-card-title {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
+.header_content {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
 }
 
 .avatar {
   width: 100px;
   height: 100px;
-  margin: 20px auto;
 }
 
-.input-spacing {
-  margin-bottom: 16px;
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.body_content{
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.pass{
+  display: flex;
+  flex-direction: row;
+}
+
+.footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 30px;
+}
+.guardar {
+  background-color: green;
+  border-radius: 10px;
+  width: 190px;
+  border: 1px solid rgb(12, 86, 12);
+  color: white;
+  transition: background-color 0.75s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.guardar:hover {
+  background-color: rgb(0, 165, 0); 
+  transform: scale(1.05); 
+}
+
+.cancelar {
+  background-color: red;
+  border-radius: 10px;
+  width: 190px;
+  border: 1px solid rgb(79, 11, 11);
+  color: white;
+  transition: background-color 0.75s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.cancelar:hover {
+  background-color: rgb(220, 0, 0); 
+  transform: scale(1.05); 
+}
+
+ion-input{
+  color: rgb(27, 62, 216)
 }

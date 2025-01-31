@@ -14,36 +14,34 @@ import { recuperaClave } from 'src/interfaces/usuario';
 })
 export class RclavePage implements OnInit {
 
-  txt_correo:string="";
-  txt_clave:string="";
-  txt_cclave:string="";
-  bloquearEmail:boolean=false;
-  bloquearCampos: boolean = false;
-  bloqueaRecuperar:boolean = false;
-  mensajeClave: string="";
+  mail: string="";
+  pass: string="";
+  repite_pass: string="";
+  mail_block: boolean=false;
+  sect_block: boolean = false;
+  rec_block: boolean = false;
+  message: string="";
 
-  constructor(private navController: NavController,
-              private servicio: AccesoService,
-              private sessionService:SessionService,
-              private loadingService: LoadingService
+  constructor(
+    private navController: NavController, private servicio: AccesoService, private sessionService:SessionService, private loadingService: LoadingService
   ) { }
 
   ngOnInit() {
-    this.bloquearCampos = true;
-    this.bloqueaRecuperar=true;
+    this.sect_block = true;
+    this.rec_block=true;
   }
 
-  validarEmail() {
-    if(this.txt_correo.toString().length !=0) {
+  ComprobarCorreo() {
+    if(this.mail.toString().length !=0) {
       const API = VALIDATION_API
 
-      const endPoint = formatUrl(API,this.txt_correo,filtermail)
+      const endPoint = formatUrl(API,this.mail,filtermail)
       this.servicio.getData(endPoint).subscribe(
         (response: any) => {
           if (response.value) {
-            this.bloquearCampos = false;
-            this.bloqueaRecuperar=false;
-            this.bloquearEmail = true;
+            this.sect_block = false;
+            this.rec_block=false;
+            this.mail_block = true;
             this.sessionService.createSesion("user-id",response.value);
           } else {
             this.loadingService.showToast("Usuario no existente", 3000, 'alert');
@@ -52,50 +50,50 @@ export class RclavePage implements OnInit {
         (err) => {
           const errorMessage = err.error?.message || 'Usuario no existente';
           this.loadingService.showToast(errorMessage, 3000, 'danger');
-          this.txt_correo = "";
+          this.mail = "";
         }
       );
     }
   }
 
 
-  validarclave() {
-    if (this.txt_clave !== this.txt_cclave) {
-      this.mensajeClave = 'Las claves no coinciden';
-      this.bloqueaRecuperar = true;
+  ComprobarClave() {
+    if (this.pass !== this.repite_pass) {
+      this.message = 'Las claves no coinciden';
+      this.rec_block = true;
     } else {
-      this.mensajeClave = '';
-      this.bloquearCampos = false;
+      this.message = '';
+      this.sect_block = false;
     }
   }
 
 
   async recuperar() {
 
-    if(this.txt_cclave.toString.length == 0 && this.txt_clave.toString().length == 0)
+    if(this.repite_pass.toString.length == 0 && this.pass.toString().length == 0)
     {
-      this.mensajeClave = 'Debe ingresar una clave';
+      this.message = 'Debe ingresar una clave';
     }else{
       const id = await this.sessionService.getSesion("user-id") ?? "";
 
       let datos: recuperaClave = {
         id: id,
-        clave_persona: this.txt_cclave
+        clave_persona: this.repite_pass
       };
 
       this.servicio.patchData(datos,PERSON_API ).subscribe((res: any) => {
         if (res) {
           this.loadingService.showToast("Clave actualizada exitosamente", 3000,'success')
-          this.txt_clave="";
-          this.txt_cclave="";
-          this.txt_correo="";
+          this.pass="";
+          this.repite_pass="";
+          this.mail="";
           this.navController.navigateBack(["/home"])
         }
       });
     }
   }
 
-  cancelar(){
+  CerrarSesion(){
     this.navController.navigateBack(["/home"]);
   }
 

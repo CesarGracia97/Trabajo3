@@ -14,31 +14,25 @@ import { LOGIN_API } from 'src/interfaces/constantes';
   standalone: false,
 })
 export class HomePage implements OnInit {
-  txt_clave: string = '';
-  txt_usuario: string = '';
+  pass: string = '';
+  user_mail: string = '';
   isPasswordVisible: boolean = false;
 
 
   constructor(
-    private loadingService: LoadingService,
-    private accessService: AccesoService,
-    private navController: NavController,
-    private modalControler: ModalController,
-    private sessionService: SessionService
+    private loadingService: LoadingService, private accessService: AccesoService, private navController: NavController, 
+    private modalControler: ModalController, private sessionService: SessionService
   ) {}
   ngOnInit(): void {
     this.sessionService.closeSession();
-    this.txt_clave = "";
-    this.txt_usuario= "";
   }
 
-  login() {
+  IniciarSesion() {
     const dto: loginDto = {
-      email: this.txt_usuario,
-      password: this.txt_clave,
+      email: this.user_mail,
+      password: this.pass,
     };
-    this.accessService.postData(dto, LOGIN_API).
-    subscribe({
+    this.accessService.postData(dto, LOGIN_API). subscribe({
       next: async (res: any) => {
         if (res.success) {
           await this.sessionService.createName("data-user-name",res.data.nombre_persona);
@@ -63,7 +57,7 @@ export class HomePage implements OnInit {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  async registrarse() {
+  async irRegistrarse() {
     const modalView = await this.modalControler.create({
       component: CuentaPage,
       componentProps: {
@@ -74,7 +68,7 @@ export class HomePage implements OnInit {
     await modalView.present();
   }
 
-  recuperar() {
+  irRecuperar() {
     this.navController.navigateForward(["/rclave"])
   }
 

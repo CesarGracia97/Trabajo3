@@ -9,24 +9,23 @@ import { NavController } from '@ionic/angular';
   standalone: false,
 })
 export class MenuPage implements OnInit {
+  
   nombre: string = '';
 
-  constructor(private navCtrl: NavController,
-              private sessionService: SessionService
+  constructor(
+    private navCtrl: NavController, private sessionService: SessionService
   ) {}
 
   async ngOnInit() {
     this.nombre = await this.sessionService.getSesion("data-user-name") ?? "";
-let c = this.nombre;
-
+    let c = this.nombre;
   }
 
-  goToProfile() {
+  iraPerfil() {
     this.navCtrl.navigateForward('/perfil');
   }
 
-  // Cerrar sesión
-  logout() {
+  CerrarSesion() {
     this.sessionService.closeSession();
     console.log('Cerrando sesión...');
     this.navCtrl.navigateRoot('/home');

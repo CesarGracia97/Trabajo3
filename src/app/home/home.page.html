@@ -6,17 +6,17 @@
     <ion-card class="login-card">
       <ion-card-content>
         <div class="usuario_contet">
-          <ion-input class="inputs" placeholder="Ingrese usuario" type="text" [(ngModel)]="txt_usuario" />
+          <ion-input class="inputs" placeholder="Ingrese usuario" type="text" [(ngModel)]="user_mail" />
         </div>
         <div class="pass_contet">
-          <ion-input class="inputs" placeholder="Ingrese su contraseña" type="password" [(ngModel)]="txt_clave" />
+          <ion-input class="inputs" placeholder="Ingrese su contraseña" type="password" [(ngModel)]="pass" />
         </div>
         <div class="content_button">
-          <ion-button (click)="login()">Iniciar Sesión</ion-button>
+          <ion-button (click)="IniciarSesion()">Iniciar Sesión</ion-button>
         </div>
         <ion-item>
-          <ion-label (click)="registrarse()">Registrarse</ion-label>
-          <ion-label (click)="recuperar()">Recuperar clave</ion-label>
+          <ion-label (click)="irRegistrarse()">Registrarse</ion-label>
+          <ion-label (click)="irRecuperar()">Recuperar clave</ion-label>
         </ion-item>
       </ion-card-content>
     </ion-card>

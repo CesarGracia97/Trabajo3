@@ -14,44 +14,35 @@ import { usuarioDto } from 'src/interfaces/usuario';
 })
 export class PerfilPage implements OnInit {
 
-  cedula: string = '';
-  nombre: string = '';
-  apellido: string = '';
-  correo: string = '';
-  clave: string = '';
-  repetirClave: string = '';
-  bloquearId: boolean = true;
-  mensaje:string="";
+  ci: string = ''; name: string = ''; apeliido: string = '';
+  mail: string = ''; pass: string = ''; repite_pass: string = '';
+  ci_block: boolean = true; message: string | null = null;
 
   constructor(
-    private navController: NavController,
-    private sessionService: SessionService,
-    private servicio: AccesoService,
-    private loadingService: LoadingService
+    private navController: NavController, private sessionService: SessionService, private servicio: AccesoService, private loadingService: LoadingService
   ) { }
 
   ngOnInit() {
     this.loadData();
   }
 
-  private validarCorreo(correo: string): boolean {
+  private ComprobarCorreo(correo: string): boolean {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(correo);
   }
 
-  async guardar() {
-    // Validaciones antes de guardar
-    if (!this.nombre || !this.apellido || !this.cedula || !this.correo) {
+  async save() {
+    if (!this.name || !this.apeliido || !this.ci || !this.mail) {
       this.loadingService.showToast("Todos los campos son obligatorios", 3000, "danger");
       return;
     }
 
-    if (!this.validarCorreo(this.correo)) {
+    if (!this.ComprobarCorreo(this.mail)) {
       this.loadingService.showToast("Correo electrónico inválido", 3000, "danger");
       return;
     }
 
-    if (this.clave !== this.repetirClave) {
+    if (this.pass !== this.repite_pass) {
       this.loadingService.showToast("Las contraseñas no coinciden", 3000, "danger");
       return;
     }
@@ -62,11 +53,11 @@ export class PerfilPage implements OnInit {
       const endPoint = formatUrl(API, id);
 
       const usuarioActualizado: usuarioDto = {
-        ci: this.cedula,
-        nombre_persona: this.nombre,
-        apellido_persona: this.apellido,
-        correo_persona: this.correo,
-        clave_persona: this.clave,
+        ci: this.ci,
+        nombre_persona: this.name,
+        apellido_persona: this.apeliido,
+        correo_persona: this.mail,
+        clave_persona: this.pass,
         id: id
       };
 
@@ -84,15 +75,15 @@ export class PerfilPage implements OnInit {
     }
   }
 
-  cancelar() {
+  CerrarSesion() {
     this.navController.navigateBack(["/home"]);
   }
 
-  verificarclave() {
-    if (this.clave !== this.repetirClave) {
-      this.mensaje = 'Las claves no coinciden';
+  ComprobarContrasena() {
+    if (this.pass !== this.repite_pass) {
+      this.message = 'Las claves no coinciden';
     } else {
-      this.mensaje = '';
+      this.message = '';
     }
   }
 
@@ -105,11 +96,11 @@ export class PerfilPage implements OnInit {
       (response: usuarioDto) => {
         if (response && response.nombre_persona) {
 
-          this.cedula = response.ci;
-          this.nombre = response.nombre_persona;
-          this.apellido = response.apellido_persona;
-          this.correo = response.correo_persona;
-          this.clave = response.clave_persona;
+          this.ci = response.ci;
+          this.name = response.nombre_persona;
+          this.apeliido = response.apellido_persona;
+          this.mail = response.correo_persona;
+          this.pass = response.clave_persona;
           this.loadingService.showToast("Información cargada exitosamente", 3000, "success");
         } else {
           this.loadingService.showToast("Usuario no encontrado", 3000, "danger");

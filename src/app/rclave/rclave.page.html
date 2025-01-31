@@ -3,23 +3,23 @@
     <div class="content">
       <ion-col class="form_recuperacion">
         <ion-item class="correo">
-          <ion-input [disabled]="bloquearEmail" type="email" placeholder="Ingresa el Correo" [(ngModel)]="txt_correo" (focusout)="validarEmail()"></ion-input>
+          <ion-input [disabled]="mail_block" type="email" placeholder="Ingresa el Correo" [(ngModel)]="mail" (focusout)="ComprobarCorreo()"></ion-input>
         </ion-item>
         <ion-item class="new_pass">
-          <ion-input [disabled]="bloquearCampos" type="password" placeholder="Ingresa la nueva clave" [(ngModel)]="txt_clave" ></ion-input>
+          <ion-input [disabled]="sect_block" type="password" placeholder="Ingresa la nueva clave" [(ngModel)]="pass" ></ion-input>
         </ion-item>
         <ion-item class="conf_pass">
-          <ion-input [disabled]="bloquearCampos" type="password" placeholder="Repite la nueva Clave" [(ngModel)]="txt_cclave" (focusout)="validarclave()"></ion-input>
+          <ion-input [disabled]="sect_block" type="password" placeholder="Repite la nueva Clave" [(ngModel)]="recuperar" (focusout)="ComprobarClave()"></ion-input>
         </ion-item>
         <ion-item class="message">
-          <ion-label *ngIf="mensajeClave">{{ mensajeClave }}</ion-label>
+          <ion-label *ngIf="message">{{ message }}</ion-label>
         </ion-item>
         <ion-row class="buttons">
           <ion-col>
-            <ion-button class="btn_recup" [disabled]="bloqueaRecuperar" (click)="recuperar()">Recuperar</ion-button>
+            <ion-button class="btn_recup" [disabled]="rec_block" (click)="recuperar()">Recuperar</ion-button>
           </ion-col>
           <ion-col>
-            <ion-button class="btn_cancel" (click)="cancelar()">Cancelar</ion-button>
+            <ion-button class="btn_cancel" (click)="CerrarSesion()">Cancelar</ion-button>
           </ion-col>
         </ion-row>
       </ion-col>
